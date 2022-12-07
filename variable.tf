@@ -1,13 +1,13 @@
-variable "ami_id" {
+variable "ami_id1" {
 default = "ami-074dc0a6f6c764218"
 }
 
 
-variable  "inst_type" {
+variable  "inst1_type" {
 default = "t2.micro"
 }
 
-variable "inst_tags" {
+variable "inst1_tags" {
 type = map(string)
 default = {
 Name = "sridhar"
@@ -20,10 +20,20 @@ type = bool
 default = true
 }
 
-variable "inst_usr_name" {
-default  = "sridhar-test"
+variable "ami_id2" {
+default = "ami-094125af156557ca2"
 }
 
-variable "inst_grp_name" {
-default  = "sridhar-test"
+
+variable  "inst2_type" {
+default = "t2.micro"
 }
+
+variable "inst2_tags" {
+type = map(string)
+default = {
+Name = "sridhar"
+environment = "test"
+}
+}
+
