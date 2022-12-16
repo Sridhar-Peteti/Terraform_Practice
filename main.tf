@@ -4,16 +4,14 @@ access_key = ""
 secret_key = ""
 }
 
-resource "aws_iam_user" "usr1" {
-name = "user1"
+resource "aws_iam_user" "usrkey" {
+for_each = var.userslist
+name = each.value
 }
 
-resource "aws_iam_user" "usr3" {
-name = "user3"
-}
-
-resource "aws_iam_user" "usr2" {
-name = "user2"
+variable "userslist" {
+type = set(string)
+default = ["user1", "user2", "user3"]
 }
 
 resource "aws_iam_group" "grpkey" {
@@ -22,6 +20,7 @@ name = "test_dev"
 
 resource "aws_iam_group_membership" "devteam" {
 name = "devteam-group-membership"
-users = [ aws_iam_user.usr1.name, aws_iam_user.usr2.name, aws_iam_user.usr3.name ]
+for_each = var.userslist
+users = [aws_iam_user.usrkey[each.value].name]
 group = aws_iam_group.grpkey.name
 }
